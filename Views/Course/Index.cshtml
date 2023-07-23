@@ -1,0 +1,38 @@
+﻿<table class="table">
+    <tr>
+        <th>Course Id</th>
+        <th>Course Name</th>
+        <th>Department</th>
+        <th>Semester</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model.CourseList)
+    {
+        <tr style="background-color: black; color: white;">
+            <td>@item.Courseid</td>
+            <td>@item.CourseName</td>
+            <td>@item.DepartmentId</td>
+            <td>@item.SemesterId</td>
+            <td>
+                <div style="display: flex; justify-content:flex-start;">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style=" border: 1px solid #ccc; border-radius: 2px; background-color:lightblue; color:black;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Courseid })
+                        </div>
+                    }
+                    <div style="border: 1px solid #ccc; border-radius: 2px; background-color:lightgreen; color:black;">
+                        @Html.ActionLink("Details", "Details", new { id = item.Courseid })
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style=" border: 1px solid #ccc; border-radius: 2px; background-color:lightcoral; color:black;">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Courseid })
+                        </div>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+</table>

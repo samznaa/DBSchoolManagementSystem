@@ -1,0 +1,94 @@
+﻿﻿@*@model  DBSchoolManagementSystem.Models.AssignInstructor*@
+@using DBSchoolManagementSystem.Models
+@model List<AssignInstructorVm>
+
+@{
+    ViewBag.Title = "AssignIndex";
+}
+<p>
+    @Html.ActionLink("Assign Instructor", "AssignInstructor", null, new {@class="btn btn-primary custom-btn"})
+</p>
+
+<h2>AssignIndex</h2>
+
+<table class="table">
+    <tr>
+        <th>Instructor Name</th>
+        <th>Department Name</th>
+        <th>Course Name</th>
+        
+
+
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td>
+                @item.InstructorName
+            </td>
+            <td>
+                @item.DepartmenttName
+            </td>
+            <td>
+                @item.CourseName
+            </td>
+
+
+
+          
+
+
+
+
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { style = "color: blue; margin-right: 5px;" })
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { style = "color: green; margin-right: 5px;" })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { style = "color: red; margin-right: 5px;" })}
+            </td>
+        </tr>
+    }
+</table>
+
+<style>
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+    .action-link {
+        color: #000;
+        margin-right: 5px;
+        text-decoration: none;
+    }
+
+        .action-link.edit-link {
+            color: blue;
+        }
+
+        .action-link.details-link {
+            color: green;
+        }
+
+        .action-link.delete-link {
+            color: red;
+        }
+</style>

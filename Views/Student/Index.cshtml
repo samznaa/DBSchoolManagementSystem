@@ -1,0 +1,110 @@
+﻿﻿@*@model DBSchoolManagementSystem.Models.Student
+    @using DBSchoolManagementSystem.Models*@
+@using DBSchoolManagementSystem.Models
+@model List<Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Student</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+}
+<h4 class="text-success">@TempData["msg"]</h4>
+
+<table class=" table">
+    <tr style="background-color: black; color: white;">
+        <th>Student Id </th>
+        <th>FullName</th>
+        <th>Address </th>
+        <th>Email </th>
+        <th>Contactno </th>
+        <th>Gender </th>
+        <th>Studentimg</th>
+        <th>EnrollmentDate </th>
+        <th>Programme </th>
+        <th>Action</th>
+
+
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td>
+                @item.StudentId
+            </td>
+
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.Email
+            </td>
+
+            <td>
+                @item.Contactno
+            </td>
+
+            <td>
+                @item.Gender
+            </td>
+            <td>
+                <img src="@item.Studentimg" width="80" height="50" />
+            </td>
+
+
+
+            <td>
+                @item.EnrollmentDate
+            </td>
+
+            <td>
+                @CommonUtilities.GetTypeNameFromCourseId(item.TypeId)
+            </td>
+
+
+
+
+
+            <td>
+                <div style="display: flex; justify-content:flex-start;">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style=" border: 1px solid #ccc; margin-right: 5px;border-radius: 2px; background-color: lightblue; color: black; width: 30px">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.StudentId })
+                        </div>
+                    }
+                    <div style="border: 1px solid #ccc; margin-right: 5px; border-radius: 2px; background-color: lightgreen; color: black; width: 40px ">
+                        @Html.ActionLink("Details", "Details", new { id = item.StudentId })
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style="border: 1px solid #ccc; margin-right: 5px; border-radius: 2px; background-color: lightcoral; color: black; width: 40px ">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+                        </div>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

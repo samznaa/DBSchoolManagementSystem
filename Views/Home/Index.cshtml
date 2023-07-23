@@ -1,0 +1,88 @@
+﻿@model DBSchoolManagementSystem.Models.HomePageCount
+
+<style>
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .counts-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .count-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color:black;
+        width: calc(25% - 20px);
+        height: 200px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .count-label {
+        font-weight: bold;
+        font-size: 24px;
+        
+    }
+
+    .instructor-box {
+        background-color: #ffc107;
+    }
+
+    .student-box {
+        background-color: #28a745;
+    }
+
+    .department-box {
+        background-color: #dc3545;
+    }
+
+    .course-box {
+        background-color: #007bff;
+    }
+</style>
+
+
+<h2>Counts:</h2>
+<div class="counts-container">
+    <a href="@Url.Action("Index", "Instructor")" class="count-box instructor-box">
+        <p class="count-label">Instructor</p>
+        <p>@Model.InstructorCount</p>
+    </a>
+
+    <a href="@Url.Action("Index", "Student")" class="count-box student-box">
+        <p class="count-label">Student</p>
+        <p>@Model.StudentCount</p>
+    </a>
+    <a href="@Url.Action("Index", "Course")" class="count-box course-box">
+        <p class="count-label">Course</p>
+        <p>@Model.CourseCount</p>
+    </a>
+    <a href="@Url.Action("Index", "Department")" class="count-box department-box">
+        <p class="count-label">Department</p>
+        <p>@Model.DepartmentCount</p>
+    </a>
+</div>
+<main>
+    <div class="text-center">
+        <img width="100%" height="400px" src="~/Image/SCHOOL.jpg" />
+        @*<h1 id="title">BHAKTAPUR MULTIPLE CAMPUS</h1>*@
+
+    </div>
+</main>
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+﻿@model DBSchoolManagementSystem.Models.Department
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Department</h2>
+
+@if (User.IsInRole("Admin"))
+{
+ 
+        @Html.ActionLink("Create New", "Create")
+    
+}
+
+<table class="table" style="border: 1px solid #ccc;">
+    <tr style="background-color:black; color: white;">
+        <th>Department Id </th>
+        <th>Department Name </th>
+        <th>Action</th>
+
+
+
+
+
+
+    </tr>
+
+    @foreach (var item in Model.DepartmentList)
+
+    {
+        <tr>
+
+            <td>
+                @item.DepartmentId
+            </td>
+            <td>
+                @item.DepartmenttName
+            </td>
+
+
+
+
+            <td>
+                <div style="display: flex; justify-content:flex-start;">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style=" border: 1px solid #ccc; margin-right: 5px;border-radius: 2px; background-color: lightblue; color: black; width: 30px">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId })
+                        </div>
+                    }
+                    <div style="border: 1px solid #ccc; margin-right: 5px; border-radius: 2px; background-color: lightgreen; color: black; width: 40px ">
+                        @Html.ActionLink("Details", "Details", new { id = item.DepartmentId })
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div style="border: 1px solid #ccc; margin-right: 5px; border-radius: 2px; background-color: lightcoral; color: black; width: 40px ">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId })
+                        </div>
+                    }
+                </div>
+        </tr>
+
+    }
+</table>
+

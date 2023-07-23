@@ -1,0 +1,106 @@
+﻿@*﻿@model List<DBSchoolManagementSystem.Models.LeaveNoteViewModel>
+
+    @{
+        ViewBag.Title = "View Leave Notes";
+    }
+
+    <h2>Leave Notes</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <tr class="text-center bg-dark text-light">
+                <th>Student Name</th>
+                <th>Instructor Name</th>
+                <th>Note</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var leaveNote in Model)
+            {
+                <tr class="text-center bg-light text-dark">
+                    <td>@leaveNote.FullName</td>
+                    <td>@leaveNote.FirstName</td>
+                    <td>@leaveNote.Note</td>
+                    <td>@leaveNote.Date</td>
+                    @if (leaveNote.IsApproved == false && leaveNote.IsRejected == false)
+                    {
+                        if (User.IsInRole("Admin") || (User.IsInRole("Instructor")))
+                        {
+                            <td>@Html.ActionLink("IsApproved", "IsApproved", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                            <td>@Html.ActionLink("IsRejected", "IsRejected", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                        }
+                        else
+                        {
+                            <td style="color:blue">Pending</td>
+                        }
+                    }
+                    else if (leaveNote.IsApproved == true)
+                    {
+                        <td style="color:green;">Approved</td>
+                    }
+                    else
+                    {
+                        <td style="color:red">Rejected</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No leave notes found.</p>
+    }*@
+@model List<DBSchoolManagementSystem.Models.leaveNoteVm>
+
+@{
+    ViewBag.Title = "View Leave Notes";
+}
+
+<h2>Leave Notes</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <tr class="text-center bg-dark text-light">
+            <th>Student Name</th>
+            <th>Instructor Name</th>
+            <th>Note</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var leaveNote in Model)
+        {
+            <tr class="text-center bg-light text-dark">
+                <td>@leaveNote.FullName</td>
+                <td>@leaveNote.FirstName</td>
+                <td>@leaveNote.Note</td>
+                <td>@leaveNote.Date</td>
+                @if (!leaveNote.IsApproved && !leaveNote.IsRejected)
+                {
+                    if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                    {
+                        <td>@Html.ActionLink("IsApproved", "IsApproved", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                        <td>@Html.ActionLink("IsRejected", "IsRejected", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                    }
+                    else
+                    {
+                        <td style="color:blue">Pending</td>
+                    }
+                }
+                else if (leaveNote.IsApproved)
+                {
+                    <td style="color:green;">Approved</td>
+                }
+                else
+                {
+                    <td style="color:red">Rejected</td>
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No leave notes found.</p>
+}
